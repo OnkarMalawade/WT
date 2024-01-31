@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tennisApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Tennis Players</title>
+    <!-- Include AngularJS and ng-table dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/esvit/ng-table/v1.0.0/dist/ng-table.min.css">
+    <script src="https://cdn.rawgit.com/esvit/ng-table/v1.0.0/dist/ng-table.min.js"></script>
+</head>
+<body ng-controller="tennisController">
+
+    <h1>Tennis Players</h1>
+
+    <table ng-table="tableParams" class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Ranking</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="player in tennisPlayers">
+                <td>{{ player.name }}</td>
+                <td>{{ player.country }}</td>
+                <td>{{ player.ranking }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        angular.module('tennisApp', ['ngTable'])
+            .controller('tennisController', function ($scope, NgTableParams) {
+                // Sample data (replace with your actual data)
+                $scope.tennisPlayers = [
+                    { name: 'Roger Federer', country: 'Switzerland', ranking: 3 },
+                    { name: 'Novak Djokovic', country: 'Serbia', ranking: 1 },
+                    { name: 'Rafael Nadal', country: 'Spain', ranking: 2 },
+                    { name: 'Dominic Thiem', country: 'Austria', ranking: 4 },
+                    { name: 'Daniil Medvedev', country: 'Russia', ranking: 5 }
+                ];
+
+                // ng-table configuration
+                $scope.tableParams = new NgTableParams({}, { dataset: $scope.tennisPlayers });
+            });
+    </script>
+
+</body>
+</html>
